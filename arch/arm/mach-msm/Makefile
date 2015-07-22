@@ -1,5 +1,13 @@
 CFLAGS_scm.o :=$(call as-instr,.arch_extension sec,-DREQUIRES_SEC=1)
 
+# Replace with own model's:
+# board-8974.o, board-8974-gpiomux.o clock-8974.o
+
+# Default QCOM names
+BOARD_OBJ_NAME:=board-8974.o
+BOARD_GPIOMUX_OBJ_NAME:=board-8974-gpiomux.o
+CLOCK_OBJ_NAME:=clock-8974.o
+
 obj-y += io.o dma.o memory.o
 ifndef CONFIG_ARM_ARCH_TIMER
 obj-y += timer.o
@@ -272,9 +280,9 @@ obj-$(CONFIG_ARCH_MSM9615) += board-9615.o devices-9615.o board-9615-regulator.o
 obj-$(CONFIG_ARCH_MSM9615) += clock-local.o clock-9615.o acpuclock-9615.o clock-rpm.o clock-pll.o
 obj-$(CONFIG_ARCH_APQ8084) += board-8084.o board-8084-gpiomux.o
 obj-$(CONFIG_ARCH_APQ8084) += clock-8084.o
-obj-$(CONFIG_ARCH_MSM8974) += board-8974.o board-8974-gpiomux.o
+obj-$(CONFIG_ARCH_MSM8974) += $(BOARD_OBJ_NAME) $(BOARD_GPIOMUX_OBJ_NAME)
 obj-$(CONFIG_ARCH_MSM8974) += clock-krait-8974.o
-obj-$(CONFIG_ARCH_MSM8974) += clock-local2.o clock-pll.o clock-8974.o clock-rpm.o clock-voter.o clock-mdss-8974.o
+obj-$(CONFIG_ARCH_MSM8974) += clock-local2.o clock-pll.o $(CLOCK_OBJ_NAME) clock-rpm.o clock-voter.o clock-mdss-8974.o
 obj-$(CONFIG_ARCH_MSM8974) += gdsc.o
 obj-$(CONFIG_ARCH_MSM9625) += gdsc.o
 obj-$(CONFIG_ARCH_MSM8226) += gdsc.o
