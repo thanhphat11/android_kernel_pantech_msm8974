@@ -321,6 +321,8 @@ source "arch/arm/mach-msm/cust/debug/Kconfig"
 # LS1-JHM modified : secure boot (F_PANTECH_SECBOOT)
 source "arch/arm/mach-msm/cust/SecureBoot/Kconfig"
 
+source "arch/arm/mach-msm/cust/data/Kconfig"
+
 #
 # 20130725 lcj@LS3
 #
