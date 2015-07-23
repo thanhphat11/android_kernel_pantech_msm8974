@@ -1073,7 +1073,11 @@ static void ngd_laddr_lookup(struct work_struct *work)
 	struct slim_device *sbdev;
 	struct list_head *pos, *next;
 	int i;
+#ifdef CONFIG_PANTECH_SND
+	pr_info("[SND] %s: skip slim_framer_booted",__func__);
+#else
 	slim_framer_booted(ctrl);
+#endif
 	mutex_lock(&ctrl->m_ctrl);
 	list_for_each_safe(pos, next, &ctrl->devs) {
 		int ret = 0;
