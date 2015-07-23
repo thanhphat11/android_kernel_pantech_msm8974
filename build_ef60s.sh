@@ -19,7 +19,7 @@ export CROSS_COMPILE=arm-eabi-
 # make zImage
 ##############################################################################
 mkdir -p ./obj/KERNEL_OBJ/
-make ARCH=arm O=./obj/KERNEL_OBJ/ msm8974_ef60s_tp20_user_defconfig
+make ARCH=arm O=./obj/KERNEL_OBJ/ ef60s_defconfig
 make -j4 ARCH=arm O=./obj/KERNEL_OBJ/ 2>&1 | tee kernel_log.txt
 
 ##############################################################################
