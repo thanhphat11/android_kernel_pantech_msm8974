@@ -387,8 +387,19 @@ static void audit_printk_skb(struct sk_buff *skb)
 	char *data = NLMSG_DATA(nlh);
 
 	if (nlh->nlmsg_type != AUDIT_EOE) {
+#ifdef CONFIG_PANTECH_SELINUX_DENIAL_LOG
+		//P11536-SHPARK-SELinux 
+		if (printk_ratelimit()) {
+			struct pantech_avc_format pantech_audit = pantech_get_avc();
+			printk(KERN_NOTICE "Denied(%d) Domain(%d) type=%d %s\n",
+						  pantech_audit.real_denied,
+						  pantech_audit.permissive_domain,
+						  nlh->nlmsg_type, data);
+		}
+#else
 		if (printk_ratelimit())
 			printk(KERN_NOTICE "type=%d %s\n", nlh->nlmsg_type, data);
+#endif
 		else
 			audit_log_lost("printk limit exceeded\n");
 	}
