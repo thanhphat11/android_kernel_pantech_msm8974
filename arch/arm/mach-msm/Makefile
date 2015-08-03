@@ -8,6 +8,13 @@ BOARD_OBJ_NAME:=board-8974.o
 BOARD_GPIOMUX_OBJ_NAME:=board-8974-gpiomux.o
 CLOCK_OBJ_NAME:=clock-8974.o
 
+# Pantech/SKY names
+ifdef CONFIG_PANTECH
+BOARD_OBJ_NAME:=board-8974-sky.o
+BOARD_GPIOMUX_OBJ_NAME:=board-8974-sky-gpiomux.o
+CLOCK_OBJ_NAME:=clock-8974-sky.o
+endif
+
 obj-y += io.o dma.o memory.o
 ifndef CONFIG_ARM_ARCH_TIMER
 obj-y += timer.o
