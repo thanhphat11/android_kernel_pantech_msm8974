@@ -704,15 +704,22 @@ int msm_post_event(struct v4l2_event *event, int timeout)
 		return -EIO;
 	}
 
+#ifdef CONFIG_PANTECH_CAMERA//F_PANTECH_CAMERA_QBUG_KERNEL_FIX_RACE_CONDITION
 	/*re-init wait_complete */
 	INIT_COMPLETION(cmd_ack->wait_complete);
+#endif
 
 	v4l2_event_queue(vdev, event);
 
 	if (timeout < 0) {
 		mutex_unlock(&session->lock);
+#ifdef CONFIG_PANTECH_CAMERA //Camif error log
+		pr_debug("%s : timeout cannot be negative Line %d\n",
+				__func__, __LINE__);
+#else
 		pr_err("%s : timeout cannot be negative Line %d\n",
 				__func__, __LINE__);
+#endif
 		return rc;
 	}
 
