@@ -1,5 +1,7 @@
 if CUST_PANTECH_H
 
+menu "SKY GPU/Display Configuration"
+
 ###################################################
 # PANTECH LCD Feature Section                     #
 #                                                 #
@@ -328,7 +330,9 @@ config F_SKYDISP_AMOLED_READ_DATA
 # Description : when aot player, overlay is broken
 ##############################################################
 config F_QUALCOMM_OVERLAY_CORRUPTION
-	bool
+	bool "msm: mdss: Fix BWC width alignment"
+	help
+	  https://www.codeaurora.org/cgit/quic/la/kernel/msm/commit/?id=e311b91b244c307793f5efca279f362c4d81211f.
 
 ##############################################################
 # owner  : p10443
@@ -445,7 +449,9 @@ config F_QUALCOMM_BUGFIX_MDP_UNDERRUN
 # Description : The bluescreen occurs during booting in video mode.
 ##############################################################
 config F_QUALCOMM_BOOTING_BLUESCREEN
-	bool
+	bool "msm: msm_bus: Only set clock rate on unset clocks."
+	help
+	  https://www.codeaurora.org/cgit/quic/la/kernel/msm/commit/?id=be53535a4e34d7f1f32e348bea2e2a877f9cf017.
 
 ##############################################################
 # owner  : p14974
@@ -497,6 +503,8 @@ config F_QUALCOMM_BWC_VIDEO_DISPLAY_HALT
 ###################################################################
 config F_SKYDISP_FIX_PINGPONG_TIMEOUT_BY_CLOCK
 	bool
+
+endmenu
 
 endif
 
